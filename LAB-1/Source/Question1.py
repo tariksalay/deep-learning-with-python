@@ -1,16 +1,29 @@
-subString = ''
-lst = []
-#Get input string
-string = input('Enter a string ==> ')
-#Iritate over the input string
-for i in string:
-    #Add characters to substring if not repeated
-    if (i not in subString):
-        subString += i
-    #Add the substring to the list and create new substring when repeated
-    else:
-        lst.append(subString)
-        subString = i
-#Append the last substring
-lst.append(subString)
-print('The longest substring without repeating characters:', max(lst))
+def longestSubstring(string):
+    n = len(string)
+    st = 0
+    maxlen = 0
+    start = 0
+    pos = {}
+    pos[string[0]] = 0
+
+    for i in range(1, n):
+        if string[i] not in pos:
+            pos[string[i]] = i
+        else:
+            if pos[string[i]] >= st:
+                currlen = i - st
+                if maxlen < currlen:
+                    maxlen = currlen
+                    start = st
+                st = pos[string[i]] + 1
+            pos[string[i]] = i
+
+    if maxlen < i - st:
+        maxlen = i - st
+        start = st
+
+    return string[start: start + maxlen]
+
+if __name__ == "__main__":
+    string = input("Enter the string ==>")
+    print(longestSubstring(string))
