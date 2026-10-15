@@ -1,0 +1,11 @@
+# Python 3.11 or 3.12. Run exercises from their own directories.
+tensorflow>=2.16,<3
+keras>=3.8,<4
+numpy>=1.26,<3
+pandas>=2.2,<3
+scikit-learn>=1.5,<2
+matplotlib>=3.8,<4
+seaborn>=0.13,<0.14
+nltk>=3.9,<4
+requests>=2.32,<3
+beautifulsoup4>=4.12,<5

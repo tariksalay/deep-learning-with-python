@@ -1,9 +1,9 @@
-from keras.layers import Input, Dense
-from keras.models import Model
-from keras.datasets import mnist
+from tensorflow.keras.layers import Input, Dense
+from tensorflow.keras.models import Model
+from tensorflow.keras.datasets import mnist
 import numpy as np
 import matplotlib.pyplot as plt
-from keras.callbacks import TensorBoard
+from tensorflow.keras.callbacks import TensorBoard
 
 #CREATE THE AUTOENCODER MODEL
 # Size of encoded representations

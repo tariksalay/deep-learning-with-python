@@ -1,35 +1,42 @@
-# Deep Learning with Python — Coursework & Experiments
+# Python, Machine Learning, and Deep Learning Coursework
 
-**Python · Machine Learning · Keras · NLP · Image Classification · Dimensionality Reduction**
+**Python · pandas · scikit-learn · TensorFlow/Keras · NLP · CNNs · RNNs**
 
-A collection of experiments completed while exploring Python, classical machine-learning techniques, and deep-learning concepts. The repository contains separate exercises, labs, and notebooks/scripts, rather than one end-to-end product.
+A collection of separate coursework experiments tracing a path from Python fundamentals to classical machine learning, text processing, neural networks, and dimensionality reduction. Each exercise has its own data and execution assumptions.
 
-## Topics covered
+## What this project demonstrates
 
-| Folder | Topic |
+- Classical and neural modeling workflows across several data types.
+- Data preparation, feature extraction, and experiment comparison.
+- Modernized API compatibility with explicit limits on full reproduction.
+
+## Start here
+
+| Read | Use it for |
 | --- | --- |
-| [ICP-1_Basics](ICP-1_Basics) | Python fundamentals |
-| [ICP-2_DataStructures](ICP-2_DataStructures) | Data structures |
-| [ICP-3_WebScraping](ICP-3_WebScraping) | Data collection |
-| [ICP-4_MLAlgorithms](ICP-4_MLAlgorithms) | Introductory ML algorithms |
-| [ICP-5_RegressionModels](ICP-5_RegressionModels) | Regression |
-| [ICP-6_KMeansClustering+PCA](ICP-6_KMeansClustering+PCA) | Clustering and principal component analysis |
-| [ICP-7_NLP](ICP-7_NLP) | Natural-language processing |
-| [M2-ICP1_Keras](M2-ICP1_Keras) | Keras fundamentals |
-| [M2-ICP3_ANN+RNN](M2-ICP3_ANN+RNN) | Artificial and recurrent neural networks |
-| [M2-ICP4_ImageClassificationCNN](M2-ICP4_ImageClassificationCNN) | CNN image classification |
-| [M2-ICP5_SentimentAnalysis+LSTM](M2-ICP5_SentimentAnalysis+LSTM) | LSTM-based sentiment work |
-| [M2-ICP6_Autoencoder+PCA](M2-ICP6_Autoencoder+PCA) | Autoencoders and dimensionality reduction |
-| [LAB-1](LAB-1), [LAB-2](LAB-2) | Additional lab exercises |
+| [Project walkthrough](docs/PROJECT_GUIDE.md) | Purpose, workflow, repository map, and a concrete example |
+| [Code and artifact reference](docs/CODE_REFERENCE.md) | Important files, functions, classes, and their responsibilities |
+| [Development guide](docs/DEVELOPMENT.md) | Setup, configuration, commands, tests, and remaining limitations |
 
-Also see the [repository wiki](https://github.com/tariksalay/deep-learning-with-python/wiki) for original course notes and exercise descriptions.
+## Explore locally
 
-## How to explore
+Use Python 3.11 or 3.12 in a virtual environment.
 
-Open each exercise folder separately and inspect its own source files, inputs, and dependencies. This is an archive of learning exercises from an earlier Python and Keras ecosystem; **there is no single verified environment or command that runs every exercise**.
+```sh
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
+```
 
-## Scope and limitations
+Inspect an exercise’s input filenames, then change into its folder before running it. There is no single command that safely runs the whole collection.
 
-The code illustrates approaches to a range of topics. It should not be interpreted as a production-grade model suite or evidence of independently validated accuracy. Model results, dataset licenses, and compatibility should be checked within each exercise before reuse.
+## Validation and scope
 
-[GitHub profile](https://github.com/tariksalay) · [Portfolio](https://tariksalay.github.io/)
+Four tests cover TensorFlow imports, CNN construction/inference, an LSTM batch and sklearn wrapper, and phrase-preprocessing schemas. They do not reproduce every training run or validate historical accuracy. Several scripts prompt, download, train, write files, or open plots at module level.
+
+
+
+---
+
+[GitHub profile](https://github.com/tariksalay) · [Portfolio](https://tariksalay.github.io/) · [Earlier README](README_HISTORY.md)
+
+The earlier README is preserved as historical context; the guides above describe this branch's implementation.

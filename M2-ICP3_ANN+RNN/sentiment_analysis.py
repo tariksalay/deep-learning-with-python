@@ -1,14 +1,14 @@
-from keras.models import Sequential
-from keras import layers
-from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import Sequential
+from tensorflow.keras import layers
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 import pandas as pd
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
-from keras.layers.embeddings import Embedding
-from keras.layers import Flatten
+from tensorflow.keras.layers import Embedding
+from tensorflow.keras.layers import Flatten
 import matplotlib.pyplot as plt
-from keras import callbacks
+from tensorflow.keras import callbacks
 df = pd.read_csv('imdb_master.csv',encoding='latin-1')
 print(df.head())
 sentences = df['review'].values
@@ -41,8 +41,8 @@ model.add(layers.Dense(3, activation='softmax'))
 model.compile(loss='sparse_categorical_crossentropy',optimizer='adam',metrics=['acc'])
 history=model.fit(X_train,y_train, epochs=5, verbose=True, validation_data=(X_test,y_test), batch_size=256)
 
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
 plt.title('Train and validation accuracy')
 plt.xlabel('Number of epochs')
 plt.ylabel('Accuracy')
@@ -91,8 +91,8 @@ print(np.argmax(pred[0]))
 # history=model.fit(X_train,y_train, epochs=5, verbose=True, validation_data=(X_test,y_test), batch_size=256)
 # #loss: 0.2391 - acc: 0.9635 - val_loss: 0.5926 - val_acc: 0.8360
 #
-# plt.plot(history.history['acc'])
-# plt.plot(history.history['val_acc'])
+# plt.plot(history.history['accuracy'])
+# plt.plot(history.history['val_accuracy'])
 # plt.title('Train and validation accuracy')
 # plt.xlabel('Number of epochs')
 # plt.ylabel('Accuracy')

@@ -1,17 +1,18 @@
 # Simple CNN model for CIFAR-10
 import numpy
-from keras.datasets import cifar10
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import Dropout
-from keras.layers import Flatten
-from keras.constraints import maxnorm
-from keras.optimizers import SGD
-from keras.layers.convolutional import Conv2D
-from keras.layers.convolutional import MaxPooling2D
-from keras.utils import np_utils
-from keras import backend as K
-from keras.callbacks import TensorBoard
+from tensorflow.keras.datasets import cifar10
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Input, Dense
+from tensorflow.keras.layers import Dropout
+from tensorflow.keras.layers import Flatten
+from tensorflow.keras.constraints import max_norm as maxnorm
+from tensorflow.keras.optimizers import SGD
+from tensorflow.keras.optimizers.schedules import InverseTimeDecay
+from tensorflow.keras.layers import Conv2D
+from tensorflow.keras.layers import MaxPooling2D
+from tensorflow.keras import utils as np_utils
+from tensorflow.keras import backend as K
+from tensorflow.keras.callbacks import TensorBoard
 K.image_data_format()
 
 
@@ -31,8 +32,8 @@ y_test = np_utils.to_categorical(y_test)
 num_classes = y_test.shape[1]
 # Create the model
 
-model = Sequential()
-model.add(Conv2D(32, (3, 3), input_shape=X_train.shape[1:], padding='same', activation='relu', kernel_constraint=maxnorm(3)))
+model = Sequential([Input(shape=X_train.shape[1:])])
+model.add(Conv2D(32, (3, 3), padding='same', activation='relu', kernel_constraint=maxnorm(3)))
 model.add(Dropout(0.2))
 model.add(Conv2D(32, (3, 3), activation='relu', padding='same', kernel_constraint=maxnorm(3)))
 model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -44,10 +45,10 @@ model.add(Dense(num_classes, activation='softmax'))
 epochs = 2
 lrate = 0.01
 decay = lrate/epochs
-sgd = SGD(lr=lrate, momentum=0.9, decay=decay, nesterov=False)
+sgd = SGD(learning_rate=InverseTimeDecay(lrate, decay_steps=1, decay_rate=decay), momentum=0.9, nesterov=False)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 print(model.summary())
-tbCallBack = TensorBoard(log_dir='C:/Users/tuyen/PycharmProjects/PythonClass1/Graph', histogram_freq=0,write_graph=True, write_images=True)
+tbCallBack = TensorBoard(log_dir='logs/cifar10', histogram_freq=0,write_graph=True, write_images=True)
 model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=epochs, batch_size=32, callbacks=[tbCallBack])
 # Fit the model
 # Fit the model

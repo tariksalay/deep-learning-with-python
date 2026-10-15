@@ -1,5 +1,5 @@
-from keras.models import Sequential
-from keras.layers.core import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 #Read data
 import pandas as pd
 data = pd.read_csv('diabetes.csv', header=None).values
