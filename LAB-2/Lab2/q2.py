@@ -1,14 +1,14 @@
 import pandas
-from keras.models import Sequential
-from keras.layers.core import Dense, Activation
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Activation
 from sklearn.model_selection import train_test_split
 import pandas as pd
 import numpy as np
-from keras.optimizers import SGD
-from keras.optimizers import Adam
+from tensorflow.keras.optimizers import SGD
+from tensorflow.keras.optimizers import Adam
 import matplotlib.pyplot as plt
-from keras.callbacks import TensorBoard
-from keras.utils import np_utils
+from tensorflow.keras.callbacks import TensorBoard
+from tensorflow.keras import utils as np_utils
 import pickle
 
 # load dataset
@@ -52,7 +52,7 @@ epochs = 100
 learning_rate = 0.005
 decay_rate = learning_rate / epochs
 momentum = 0.8
-adam = Adam(lr=learning_rate, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+adam = Adam(learning_rate=learning_rate, beta_1=0.9, beta_2=0.999, epsilon=1e-7, amsgrad=False)
 
 # Model 2
 # epochs = 150
@@ -87,8 +87,8 @@ plt.legend(['train', 'test'], loc='upper left')
 plt.show()
 
 # acc
-plt.plot(hist.history['acc'])
-plt.plot(hist.history['val_acc'])
+plt.plot(hist.history['accuracy'])
+plt.plot(hist.history['val_accuracy'])
 plt.title('model acc')
 plt.ylabel('acc')
 plt.xlabel('epoch')

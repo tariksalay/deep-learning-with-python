@@ -1,10 +1,10 @@
 import pandas as pd
-from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
-from keras.models import Sequential, load_model
-from keras.layers import Dense, Embedding, LSTM, SpatialDropout1D
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import Sequential, load_model
+from tensorflow.keras.layers import Dense, Embedding, LSTM, SpatialDropout1D
 from sklearn.model_selection import train_test_split
-from keras.utils.np_utils import to_categorical
+from tensorflow.keras.utils import to_categorical
 import re
 import warnings
 warnings.filterwarnings("ignore")
@@ -26,9 +26,9 @@ data = pd.read_csv('train.csv', delimiter='\t')
 # Keeping only the neccessary columns
 data = data[['Phrase','Sentiment']]
 data['Phrase'] = data['Phrase'].apply(lambda x: x.lower())
-data['Phrase'] = data['Phrase'].apply((lambda x: re.sub('[^a-zA-z0-9\s]', '', x)))
+data['Phrase'] = data['Phrase'].apply((lambda x: re.sub(r'[^a-zA-z0-9\s]', '', x)))
 for idx, row in data.iterrows():
-    row[0] = row[0].replace('rt', ' ')
+    data.loc[idx, 'text'] = row['text'].replace('rt', ' ')
 
 X = data['Phrase'].values
 y = data['Sentiment'].values

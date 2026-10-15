@@ -1,9 +1,9 @@
-from keras import Sequential
-from keras.datasets import mnist
+from tensorflow.keras import Sequential
+from tensorflow.keras.datasets import mnist
 import numpy as np
 import matplotlib.pyplot as plt
-from keras.layers import Dense
-from keras.utils import to_categorical
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.utils import to_categorical
 
 (train_images,train_labels),(test_images, test_labels) = mnist.load_data()
 

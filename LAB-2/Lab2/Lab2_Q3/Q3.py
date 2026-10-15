@@ -1,14 +1,14 @@
 #Question 3:  Implement the image classification with CNN model
 #Dataset: https://www.kaggle.com/slothkong/10-monkey-species/data
-from keras.preprocessing.image import img_to_array, load_img
+from tensorflow.keras.utils import img_to_array, load_img
 import os
 import numpy as np
-from keras.utils import np_utils
-from keras.models import Sequential, load_model
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers.convolutional import Conv2D, MaxPooling2D
-from keras.constraints import maxnorm
-from keras.optimizers import SGD
+from tensorflow.keras import utils as np_utils
+from tensorflow.keras.models import Sequential, load_model
+from tensorflow.keras.layers import Dense, Dropout, Flatten
+from tensorflow.keras.layers import Conv2D, MaxPooling2D
+from tensorflow.keras.constraints import max_norm as maxnorm
+from tensorflow.keras.optimizers import SGD
 
 
 train_path = './Lab2_Q3/training'
@@ -93,13 +93,13 @@ print('Loss:', score[0])
 print('Accuracy: ', score[1])
 
 print('\nFirst species:')
-pred = model.predict_classes(x_test[0:4], verbose=0)
+pred = np.argmax(model.predict(x_test[0:4], verbose=0), axis=1)
 print('\tPrediction:', pred)
 results = np.array(y_test[0:4])
 print('\tResults:', np.argmax(results, axis=1))
 
 print('\nSecond species:')
-pred = model.predict_classes(x_test[27:31], verbose=0)
+pred = np.argmax(model.predict(x_test[27:31], verbose=0), axis=1)
 print('\tPrediction:', pred)
 results = np.array(y_test[27:31])
 print('\tResults:', np.argmax(results, axis=1))

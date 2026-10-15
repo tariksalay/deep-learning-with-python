@@ -1,7 +1,7 @@
-import keras
-from keras.layers import Input, Dense
-from keras.models import Model
-from keras import regularizers
+from tensorflow import keras
+from tensorflow.keras.layers import Input, Dense
+from tensorflow.keras.models import Model
+from tensorflow.keras import regularizers
 
 # this is the size of our encoded representations
 encoding_dim = 32
@@ -39,7 +39,7 @@ autoencoder.compile(optimizer='adadelta', loss='binary_crossentropy')
 tbCallBack = keras.callbacks.TensorBoard(log_dir='./Graph', histogram_freq=0)
 
 
-from keras.datasets import mnist
+from tensorflow.keras.datasets import mnist
 import numpy as np
 (x_train, _), (x_test, _) = mnist.load_data()
 x_train = x_train.astype('float32') / 255.

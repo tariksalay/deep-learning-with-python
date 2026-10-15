@@ -63,7 +63,7 @@ test_df = test_df.drop(['Ticket', 'Cabin','Parch','SibSp'], axis=1)
 
 ##Creating new feature extracting from existing
 for dataset in combine:
-    dataset['Title'] = dataset.Name.str.extract(' ([A-Za-z]+)\.', expand=False)
+    dataset['Title'] = dataset.Name.str.extract(r' ([A-Za-z]+)\.', expand=False)
 
 for dataset in combine:
      dataset['Title'] = dataset['Title'].replace(['Lady', 'Countess', 'Jonkheer', 'Dona'], 'Lady')

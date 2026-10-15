@@ -1,13 +1,13 @@
 
-from keras.preprocessing import sequence, text
-from keras.models import Sequential, load_model
-from keras.layers import Dense, Dropout, Embedding, Conv1D, Flatten, MaxPooling1D
+from tensorflow.keras.preprocessing import sequence, text
+from tensorflow.keras.models import Sequential, load_model
+from tensorflow.keras.layers import Dense, Dropout, Embedding, Conv1D, Flatten, MaxPooling1D
 import pandas as pd
 import re
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 import numpy as np
-from keras.utils.np_utils import to_categorical
+from tensorflow.keras.utils import to_categorical
 import csv
 
 
@@ -25,9 +25,9 @@ epochs = 10
 train = pd.read_csv('./train.csv', delimiter='\t')
 train = train[['Phrase', 'Sentiment']]
 train['Phrase'] = train['Phrase'].apply(lambda x: x.lower())
-train['Phrase'] = train['Phrase'].apply(lambda x: re.sub('[^a-zA-Z0-9\s]', '', x))
+train['Phrase'] = train['Phrase'].apply(lambda x: re.sub(r'[^a-zA-Z0-9\s]', '', x))
 for index, row in train.iterrows():
-    row[0] = row[0].replace('rt', ' ')
+    data.loc[idx, 'text'] = row['text'].replace('rt', ' ')
 
 x = train['Phrase'].values
 y = train['Sentiment'].values
@@ -83,7 +83,7 @@ test = pd.read_csv('test.csv', delimiter='\t')
 id = test['PhraseId'].values
 
 test['Phrase'] = test['Phrase'].apply(lambda x: x.lower())
-test['Phrase'] = test['Phrase'].apply(lambda x: re.sub('[^a-zA-Z0-9\s]', '', x))
+test['Phrase'] = test['Phrase'].apply(lambda x: re.sub(r'[^a-zA-Z0-9\s]', '', x))
 for index, row in test.iterrows():
     row[2] = row[2].replace('rt', ' ')
 

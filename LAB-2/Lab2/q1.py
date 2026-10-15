@@ -1,14 +1,14 @@
 import pandas
-from keras.models import Sequential
-from keras.layers.core import Dense, Dropout, Activation
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout, Activation
 from sklearn.model_selection import train_test_split
 import pandas as pd
 import numpy as np
-from keras.optimizers import Adam
+from tensorflow.keras.optimizers import Adam
 import matplotlib.pyplot as plt
-from keras.callbacks import TensorBoard
+from tensorflow.keras.callbacks import TensorBoard
 from sklearn.preprocessing import LabelEncoder
-from keras import metrics
+from tensorflow.keras import metrics
 import pickle
 
 # load dataset
@@ -40,7 +40,7 @@ learning_rate = 0.005
 batch_size = 64
 decay_rate = learning_rate / epochs
 activation_function = 'linear'
-adam = Adam(lr=learning_rate, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+adam = Adam(learning_rate=learning_rate, beta_1=0.9, beta_2=0.999, epsilon=1e-7, amsgrad=False)
 
 # model 2
 # epochs = 20
