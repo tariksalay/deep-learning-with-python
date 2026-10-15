@@ -28,7 +28,7 @@ data = data[['Phrase','Sentiment']]
 data['Phrase'] = data['Phrase'].apply(lambda x: x.lower())
 data['Phrase'] = data['Phrase'].apply((lambda x: re.sub(r'[^a-zA-z0-9\s]', '', x)))
 for idx, row in data.iterrows():
-    data.loc[idx, 'text'] = row['text'].replace('rt', ' ')
+    data.loc[idx, 'Phrase'] = row['Phrase'].replace('rt', ' ')
 
 X = data['Phrase'].values
 y = data['Sentiment'].values

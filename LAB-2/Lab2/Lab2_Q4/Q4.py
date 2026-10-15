@@ -27,7 +27,7 @@ train = train[['Phrase', 'Sentiment']]
 train['Phrase'] = train['Phrase'].apply(lambda x: x.lower())
 train['Phrase'] = train['Phrase'].apply(lambda x: re.sub(r'[^a-zA-Z0-9\s]', '', x))
 for index, row in train.iterrows():
-    data.loc[idx, 'text'] = row['text'].replace('rt', ' ')
+    train.loc[index, 'Phrase'] = row['Phrase'].replace('rt', ' ')
 
 x = train['Phrase'].values
 y = train['Sentiment'].values

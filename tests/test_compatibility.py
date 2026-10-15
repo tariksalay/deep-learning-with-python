@@ -2,6 +2,9 @@
 import ast
 from pathlib import Path
 import unittest
+from unittest.mock import patch
+import re
+import pandas as pd
 import numpy as np
 from sklearn.base import is_classifier
 
@@ -13,6 +16,23 @@ def execute(nodes, namespace, path):
 
 
 class CompatibilityTests(unittest.TestCase):
+    def test_phrase_preprocessing_uses_each_exercises_actual_column(self):
+        for relative, variable in [('LAB-2/Lab2/Lab2_Q4/Q4.py', 'train'),
+                                   ('LAB-2/Lab2/Lab2_Q5/Lab2_Q5.py', 'data')]:
+            path = ROOT / relative
+            body = ast.parse(path.read_text()).body
+            start = next(i for i, node in enumerate(body) if isinstance(node, ast.Assign)
+                         and isinstance(node.value, ast.Call)
+                         and isinstance(node.value.func, ast.Attribute)
+                         and node.value.func.attr == 'read_csv')
+            end = next(i for i in range(start, len(body)) if isinstance(body[i], ast.For))
+            frame = pd.DataFrame({'Phrase': ['rt GREAT', 'BAD'], 'Sentiment': [1, 0]})
+            namespace = {'pd': pd, 're': re}
+            with patch.object(pd, 'read_csv', return_value=frame.copy()):
+                execute(body[start:end + 1], namespace, path)
+            self.assertEqual(namespace[variable]['Phrase'].str.strip().tolist(), ['great', 'bad'])
+            self.assertNotIn('text', namespace[variable].columns)
+
     def test_tensorflow_imports_resolve(self):
         for path in ROOT.rglob('*.py'):
             if 'tests' in path.parts:
